@@ -1,0 +1,37 @@
+.DATA
+    BLOCK1 DB 'MALAYALAM'
+    MSG1 DB "IT IS PALINDROME $"
+    MSG2 DB "IT IS NOT PALINDROME $"
+    PAL DB 00H
+    BLOCK2 DB 9 DUP(?)
+    nl DB 0dh,0ah,'$' 
+PRINT MACRO MSG
+    MOV AH,09H
+    LEA DX,MSG
+    INT 21H
+    MOV AX, 4C00H
+    INT 21H
+ENDM
+.CODE
+START: 
+    MOV AX, @DATA
+    MOV DS,AX
+    LEA SI, BLOCK1
+    LEA DI,BLOCK2+8
+    MOV CX,00009H
+    BACK: 
+        CLD
+        LODSB
+        STD
+        STOSB
+        LOOP BACK
+        LEA SI,BLOCK1
+        LEA DI,BLOCK2
+        MOV CX,0009H
+        CLD
+        REPZ CMPSB
+        JNZ SKIP
+        PRINT MSG1
+    SKIP:
+        PRINT MSG2
+END START
