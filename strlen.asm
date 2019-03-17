@@ -1,4 +1,5 @@
 .MODEL SMALL
+.STACK 64H
 .DATA
     INSTR DB 20 DUP("$")
     MSG1 DB "LENGTH = $"
