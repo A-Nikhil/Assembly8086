@@ -1,6 +1,6 @@
 .MODEL SMALL
 
-.STACK 64
+.STACK 100H
 
 .DATA
         VAL1    DB      01H
